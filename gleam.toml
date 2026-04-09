@@ -1,0 +1,14 @@
+name = "avid"
+version = "0.0.1"
+description = "Deterministic avatar generator from names. Renders to SVG, PNG, and BMP."
+
+[dependencies]
+gleam_stdlib = ">= 0.59.0 and < 2.0.0"
+wisp = ">= 2.0.0 and < 3.0.0"
+gleam_http = ">= 4.0.0 and < 5.0.0"
+mist = ">= 6.0.0 and < 7.0.0"
+gleam_erlang = ">= 1.0.0 and < 2.0.0"
+logging = ">= 1.2.0 and < 2.0.0"
+
+[dev-dependencies]
+gleeunit = ">= 1.0.0 and < 2.0.0"
