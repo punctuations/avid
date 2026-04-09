@@ -13,7 +13,7 @@ FNV-1a 32-bit hash          (fast, good distribution, pure bitwise ops)
     │
     ├─> Hue from bits [7..0]  -> foreground + background color via HSL→RGB
     │
-    └─> Bits [0..14]          -> 5×5 mirrored boolean grid
+    └─> Bits [0..14]          -> 5x5 mirrored boolean grid
             │
             └─> Rendered to SVG / BMP / PNG
 ```
@@ -30,13 +30,13 @@ import avid
 pub fn main() {
   let av = avid.from_name("John Doe")
 
-  // SVG — pass pixel size for width/height attributes
+  // SVG - pass pixel size for width/height attributes
   let svg: String = avid.to_svg(av, 200)
 
-  // BMP — pass cell_size (pixels per grid cell); 40 → 200×200
+  // BMP - pass cell_size (pixels per grid cell); 40 → 200×200
   let bmp: BitArray = avid.to_bmp(av, 40)
 
-  // PNG — same cell_size convention
+  // PNG - same cell_size convention
   let png: BitArray = avid.to_png(av, 40)
 }
 ```
