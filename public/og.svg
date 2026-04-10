@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+
+  <!-- background -->
+  <rect width="1200" height="630" fill="#0f0f0f"/>
+
+  <!-- logo: 3 squares -->
+  <rect x="560" y="240" width="32" height="32" fill="#e0e0e0"/>
+  <rect x="600" y="240" width="32" height="32" fill="#e0e0e0"/>
+  <rect x="600" y="280" width="32" height="32" fill="#e0e0e0"/>
+
+  <!-- tagline -->
+  <text x="600" y="360" font-family="'JetBrains Mono', monospace" font-size="15" fill="#555" text-anchor="middle">
+    deterministic avatar generation
+  </text>
+
+  <!-- ASCII tree -->
+  <text xml:space="preserve" font-family="'JetBrains Mono', monospace" font-size="11.5" fill="#e0e0e0" opacity="0.09" text-anchor="start">
+    <tspan x="790" dy="240" >            . = - + + # # * + - - : .         </tspan>
+    <tspan x="790" dy="16" >       : = * # *  ###  * #%%%% # * = -         </tspan>
+    <tspan x="790" dy="16" >    . - + # #%# * + * + *# * + = : - * + = - . </tspan>
+    <tspan x="790" dy="16" >  . - = -- : --= - . -*#++ ### %%% *+++= --     </tspan>
+    <tspan x="790" dy="16" >: : : : - : --:    .**= : : : : -*+ ### %%% #*=.</tspan>
+    <tspan x="790" dy="16" >  -*%%% ### %%*++:    -### #==:--= -*#+ - . : : </tspan>
+    <tspan x="790" dy="16" > :-*% ### %%%%#%%%#*=   -*%-*+=+- : .---: . .   </tspan>
+    <tspan x="790" dy="16" >.==+++= -*- : :   =#%%%=      :+*%%%%%###+- :   </tspan>
+    <tspan x="790" dy="16" >.: : :##%%%#+:+*=*#% ### %*:  . .:. .  .::-:   </tspan>
+    <tspan x="790" dy="16" >-##%%%%# ### +-.  -%+=-.  :#%%*    +*%**###+ :. </tspan>
+    <tspan x="790" dy="16" >.:*= -: :+.  .=++:..---. -#%%=   :::---=: .:-: </tspan>
+    <tspan x="790" dy="16" >  =#%#= :           .-=   :#%%*+*#%%%%#*##---:  </tspan>
+    <tspan x="790" dy="16" >  .--.         .==     -+%%#% ### %%*.  :=#: .: </tspan>
+    <tspan x="790" dy="16" >          . :+:   ::    .=-        .%%*   :=.:-:</tspan>
+    <tspan x="790" dy="16" >          .:=:    ..               .#%%#= :-::=- </tspan>
+    <tspan x="790" dy="16" >          ..                       :*%%* :=+= .  </tspan>
+    <tspan x="790" dy="16" >                               . -*%%%+           </tspan>
+    <tspan x="790" dy="16" >                               :#%%%# -           </tspan>
+    <tspan x="790" dy="16" >                              ::+%%%#-- :         </tspan>
+    <tspan x="790" dy="16" >                              =%%%%#%- .          </tspan>
+    <tspan x="790" dy="16" >                          .:=#%%%%%%%+=- :--:    </tspan>
+    <tspan x="790" dy="16" >         .::--===++**** #### #****+--+- - .      </tspan>
+    <tspan x="790" dy="16" >                ...-==+.. ** .***-+- - .      </tspan>
+  </text>
+
+  <!-- flower field row 2 (back row, y ~610) -->
+  <text x="18"   y="612" font-family="'JetBrains Mono', monospace" font-size="9"  fill="#666" opacity="0.55" writing-mode="sideways-lr">&lt;%</text>
+  <text x="58"   y="615" font-family="'JetBrains Mono', monospace" font-size="11" fill="#666" opacity="0.6" writing-mode="sideways-lr">&lt;@</text>
+  <text x="106"  y="610" font-family="'JetBrains Mono', monospace" font-size="8"  fill="#666" opacity="0.5" writing-mode="sideways-lr">&lt;*</text>
+  <text x="152"  y="614" font-family="'JetBrains Mono', monospace" font-size="10" fill="#666" opacity="0.6" writing-mode="sideways-lr">&lt;#</text>
+  <text x="196"  y="611" font-family="'JetBrains Mono', monospace" font-size="9"  fill="#666" opacity="0.55" writing-mode="sideways-lr">&lt;&amp;</text>
+  <text x="245"  y="615" font-family="'JetBrains Mono', monospace" font-size="11" fill="#666" opacity="0.6" writing-mode="sideways-lr">&lt;*</text>
+  <text x="286"  y="610" font-family="'JetBrains Mono', monospace" font-size="8"  fill="#666" opacity="0.5" writing-mode="sideways-lr">&lt;%</text>
+  <text x="326"  y="614" font-family="'JetBrains Mono', monospace" font-size="12" fill="#666" opacity="0.6" writing-mode="sideways-lr">&lt;#</text>
+  <text x="378"  y="611" font-family="'JetBrains Mono', monospace" font-size="9"  fill="#666" opacity="0.55" writing-mode="sideways-lr">&lt;*</text>
+  <text x="432"  y="615" font-family="'JetBrains Mono', monospace" font-size="10" fill="#666" opacity="0.6" writing-mode="sideways-lr">&lt;#</text>
+  <text x="468"  y="610" font-family="'JetBrains Mono', monospace" font-size="8"  fill="#666" opacity="0.5" writing-mode="sideways-lr">&lt;&amp;</text>
+  <text x="502"  y="614" font-family="'JetBrains Mono', monospace" font-size="11" fill="#666" opacity="0.6" writing-mode="sideways-lr">&lt;#</text>
+  <text x="556"  y="612" font-family="'JetBrains Mono', monospace" font-size="9"  fill="#666" opacity="0.55" writing-mode="sideways-lr">&lt;@</text>
+  <text x="596"  y="615" font-family="'JetBrains Mono', monospace" font-size="10" fill="#666" opacity="0.6" writing-mode="sideways-lr">&lt;#</text>
+  <text x="644"  y="610" font-family="'JetBrains Mono', monospace" font-size="8"  fill="#666" opacity="0.5" writing-mode="sideways-lr">&lt;*</text>
+  <text x="684"  y="614" font-family="'JetBrains Mono', monospace" font-size="12" fill="#666" opacity="0.6" writing-mode="sideways-lr">&lt;*</text>
+  <text x="736"  y="611" font-family="'JetBrains Mono', monospace" font-size="9"  fill="#666" opacity="0.55" writing-mode="sideways-lr">&lt;&amp;</text>
+  <text x="776"  y="615" font-family="'JetBrains Mono', monospace" font-size="11" fill="#666" opacity="0.6" writing-mode="sideways-lr">&lt;*</text>
+  <text x="824"  y="610" font-family="'JetBrains Mono', monospace" font-size="8"  fill="#666" opacity="0.5" writing-mode="sideways-lr">&lt;%</text>
+  <text x="864"  y="614" font-family="'JetBrains Mono', monospace" font-size="10" fill="#666" opacity="0.6" writing-mode="sideways-lr">&lt;#</text>
+  <text x="912"  y="612" font-family="'JetBrains Mono', monospace" font-size="9"  fill="#666" opacity="0.55" writing-mode="sideways-lr">&lt;*</text>
+  <text x="952"  y="615" font-family="'JetBrains Mono', monospace" font-size="11" fill="#666" opacity="0.6" writing-mode="sideways-lr">&lt;@</text>
+  <text x="1000" y="610" font-family="'JetBrains Mono', monospace" font-size="8"  fill="#666" opacity="0.5" writing-mode="sideways-lr">&lt;&amp;</text>
+  <text x="1040" y="614" font-family="'JetBrains Mono', monospace" font-size="10" fill="#666" opacity="0.6" writing-mode="sideways-lr">&lt;#</text>
+  <text x="1088" y="611" font-family="'JetBrains Mono', monospace" font-size="9"  fill="#666" opacity="0.55" writing-mode="sideways-lr">&lt;%</text>
+  <text x="1130" y="615" font-family="'JetBrains Mono', monospace" font-size="12" fill="#666" opacity="0.6" writing-mode="sideways-lr">&lt;#</text>
+  <text x="1178" y="610" font-family="'JetBrains Mono', monospace" font-size="8"  fill="#666" opacity="0.5" writing-mode="sideways-lr">&lt;*</text>
+
+  <!-- flower field row 1 (front row, y ~626) -->
+  <text x="8"    y="628" font-family="'JetBrains Mono', monospace" font-size="13" fill="#666" opacity="0.65" writing-mode="sideways-lr">&lt;#</text>
+  <text x="52"   y="625" font-family="'JetBrains Mono', monospace" font-size="10" fill="#666" opacity="0.6" writing-mode="sideways-lr">&lt;*</text>
+  <text x="94"   y="629" font-family="'JetBrains Mono', monospace" font-size="14" fill="#666" opacity="0.65" writing-mode="sideways-lr">&lt;*</text>
+  <text x="144"  y="624" font-family="'JetBrains Mono', monospace" font-size="11" fill="#666" opacity="0.6" writing-mode="sideways-lr">&lt;&amp;</text>
+  <text x="188"  y="629" font-family="'JetBrains Mono', monospace" font-size="13" fill="#666" opacity="0.65" writing-mode="sideways-lr">&lt;#</text>
+  <text x="236"  y="623" font-family="'JetBrains Mono', monospace" font-size="9"  fill="#666" opacity="0.6" writing-mode="sideways-lr">&lt;%</text>
+  <text x="276"  y="630" font-family="'JetBrains Mono', monospace" font-size="15" fill="#666" opacity="0.65" writing-mode="sideways-lr">&lt;#</text>
+  <text x="330"  y="625" font-family="'JetBrains Mono', monospace" font-size="11" fill="#666" opacity="0.6" writing-mode="sideways-lr">&lt;*</text>
+  <text x="372"  y="629" font-family="'JetBrains Mono', monospace" font-size="12" fill="#666" opacity="0.65" writing-mode="sideways-lr">&lt;#</text>
+  <text x="420"  y="624" font-family="'JetBrains Mono', monospace" font-size="10" fill="#666" opacity="0.6" writing-mode="sideways-lr">&lt;&amp;</text>
+  <text x="462"  y="630" font-family="'JetBrains Mono', monospace" font-size="14" fill="#666" opacity="0.65" writing-mode="sideways-lr">&lt;#</text>
+  <text x="512"  y="626" font-family="'JetBrains Mono', monospace" font-size="11" fill="#666" opacity="0.6" writing-mode="sideways-lr">&lt;%</text>
+  <text x="554"  y="629" font-family="'JetBrains Mono', monospace" font-size="13" fill="#666" opacity="0.65" writing-mode="sideways-lr">&lt;*</text>
+  <text x="602"  y="624" font-family="'JetBrains Mono', monospace" font-size="10" fill="#666" opacity="0.6" writing-mode="sideways-lr">&lt;@</text>
+  <text x="644"  y="630" font-family="'JetBrains Mono', monospace" font-size="15" fill="#666" opacity="0.65" writing-mode="sideways-lr">&lt;#</text>
+  <text x="698"  y="625" font-family="'JetBrains Mono', monospace" font-size="11" fill="#666" opacity="0.6" writing-mode="sideways-lr">&lt;&amp;</text>
+  <text x="740"  y="629" font-family="'JetBrains Mono', monospace" font-size="12" fill="#666" opacity="0.65" writing-mode="sideways-lr">&lt;*</text>
+  <text x="788"  y="623" font-family="'JetBrains Mono', monospace" font-size="9"  fill="#666" opacity="0.6" writing-mode="sideways-lr">&lt;%</text>
+  <text x="828"  y="630" font-family="'JetBrains Mono', monospace" font-size="14" fill="#666" opacity="0.65" writing-mode="sideways-lr">&lt;#</text>
+  <text x="878"  y="626" font-family="'JetBrains Mono', monospace" font-size="11" fill="#666" opacity="0.6" writing-mode="sideways-lr">&lt;*</text>
+  <text x="920"  y="629" font-family="'JetBrains Mono', monospace" font-size="13" fill="#666" opacity="0.65" writing-mode="sideways-lr">&lt;#</text>
+  <text x="968"  y="624" font-family="'JetBrains Mono', monospace" font-size="10" fill="#666" opacity="0.6" writing-mode="sideways-lr">&lt;&amp;</text>
+  <text x="1010" y="630" font-family="'JetBrains Mono', monospace" font-size="12" fill="#666" opacity="0.65" writing-mode="sideways-lr">&lt;*</text>
+  <text x="1058" y="625" font-family="'JetBrains Mono', monospace" font-size="11" fill="#666" opacity="0.6" writing-mode="sideways-lr">&lt;%</text>
+  <text x="1100" y="629" font-family="'JetBrains Mono', monospace" font-size="14" fill="#666" opacity="0.65" writing-mode="sideways-lr">&lt;#</text>
+  <text x="1150" y="624" font-family="'JetBrains Mono', monospace" font-size="10" fill="#666" opacity="0.6" writing-mode="sideways-lr">&lt;*</text>
+  <text x="1186" y="630" font-family="'JetBrains Mono', monospace" font-size="13" fill="#666" opacity="0.65" writing-mode="sideways-lr">&lt;#</text>
+
+</svg>
