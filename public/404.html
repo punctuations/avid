@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta property="og:image" content="/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="/og.png" />
+    <meta property="og:title" content="404 - avid" />
+    <meta property="og:description" content="Not found." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 - not found</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --bg: #0f0f0f;
+        --bg2: #1a1a1a;
+        --fg: #c9c9c9;
+        --fg-dim: #666;
+        --accent: #e0e0e0;
+        --border: #2a2a2a;
+        --link: #a06666;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--fg);
+        font-family: "JetBrains Mono", monospace;
+        font-size: 14px;
+        line-height: 1.7;
+        padding: 0 24px;
+      }
+
+      /* GRID LAYOUT */
+      .layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        min-height: 100vh;
+        align-items: center;
+        max-width: 1100px;
+        margin: 0 auto;
+        gap: 40px;
+      }
+
+      /* LEFT SIDE */
+      .wrap {
+        max-width: 480px;
+      }
+
+      .header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 32px;
+      }
+
+      .logo {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 40px;
+        gap: 3px;
+        margin-right: 16px;
+      }
+
+      .logo span {
+        display: block;
+        width: 17px;
+        height: 17px;
+        background: var(--accent);
+      }
+      .logo span:nth-child(3) {
+        background: transparent;
+      }
+
+      /* RIGHT SIDE */
+      @media (max-width: 800px) {
+        .tree {
+          position: fixed;
+          inset: 0;
+
+          z-index: -1;
+        }
+
+        .tree img {
+          width: 70% !important;
+          bottom: 5% !important;
+
+          right: initial !important;
+        }
+
+        .layout {
+          grid-template-columns: 1fr;
+        }
+
+        .code-block {
+          background: var(--bg2);
+          opacity: 0.5;
+        }
+      }
+
+      .tree {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .tree img {
+        position: absolute;
+        width: 45%;
+        right: 5%;
+        bottom: 0;
+        /* max-width: 420px; */
+
+        user-select: none;
+        pointer-events: none;
+      }
+
+      h1 {
+        font-size: 32px;
+        color: var(--accent);
+      }
+
+      p {
+        color: var(--fg-dim);
+        margin-bottom: 24px;
+        font-size: 13px;
+      }
+
+      .code-block {
+        border-radius: 0.25rem;
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        padding: 20px 24px;
+        margin-bottom: 24px;
+      }
+
+      .code-block code {
+        color: var(--accent);
+        font-size: 13px;
+      }
+
+      a {
+        color: var(--link);
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .center {
+        width: 100%;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="layout">
+      <!-- LEFT -->
+      <div class="wrap">
+        <div class="header">
+          <div class="logo" aria-label="avid">
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <h1>404</h1>
+        </div>
+
+        <p>the resource you're looking for doesn't exist.</p>
+
+        <div class="code-block">
+          <code>&gt; GET /??? -> 404</code>
+        </div>
+
+        <div class="center">
+          <a href="/">docs -></a>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="tree">
+        <img src="/tree.svg" alt="tree" />
+      </div>
+    </div>
+  </body>
+</html>

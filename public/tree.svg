@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 330 368" width="368" height="368">
+
+  <!-- ASCII tree -->
+  <text xml:space="preserve" font-family="'JetBrains Mono', monospace" font-size="11.5"
+    fill="#e0e0e0" opacity="0.09" text-anchor="start">
+    <tspan x="0" dy="0" >            . = - + + # # * + - - : .         </tspan>
+    <tspan x="0" dy="16" >       : = * # *  ###  * #%%%% # * = -         </tspan>
+    <tspan x="0" dy="16" >    . - + # #%# * + * + *# * + = : - * + = - . </tspan>
+    <tspan x="0" dy="16" >  . - = -- : --= - . -*#++ ### %%% *+++= --     </tspan>
+    <tspan x="0" dy="16" >: : : : - : --:    .**= : : : : -*+ ### %%% #*=.</tspan>
+    <tspan x="0" dy="16" >  -*%%% ### %%*++:    -### #==:--= -*#+ - . : : </tspan>
+    <tspan x="0" dy="16" > :-*% ### %%%%#%%%#*=   -*%-*+=+- : .---: . .   </tspan>
+    <tspan x="0" dy="16" >.==+++= -*- : :   =#%%%=      :+*%%%%%###+- :   </tspan>
+    <tspan x="0" dy="16" >.: : :##%%%#+:+*=*#% ### %*:  . .:. .  .::-:   </tspan>
+    <tspan x="0" dy="16" >-##%%%%# ### +-.  -%+=-.  :#%%*    +*%**###+ :. </tspan>
+    <tspan x="0" dy="16" >.:*= -: :+.  .=++:..---. -#%%=   :::---=: .:-: </tspan>
+    <tspan x="0" dy="16" >  =#%#= :           .-=   :#%%*+*#%%%%#*##---:  </tspan>
+    <tspan x="0" dy="16" >  .--.         .==     -+%%#% ### %%*.  :=#: .: </tspan>
+    <tspan x="0" dy="16" >          . :+:   ::    .=-        .%%*   :=.:-:</tspan>
+    <tspan x="0" dy="16" >          .:=:    ..               .#%%#= :-::=- </tspan>
+    <tspan x="0" dy="16" >          ..                       :*%%* :=+= .  </tspan>
+    <tspan x="0" dy="16" >                               . -*%%%+           </tspan>
+    <tspan x="0" dy="16" >                               :#%%%# -           </tspan>
+    <tspan x="0" dy="16" >                              ::+%%%#-- :         </tspan>
+    <tspan x="0" dy="16" >                              =%%%%#%- .          </tspan>
+    <tspan x="0" dy="16" >                          .:=#%%%%%%%+=- :--:    </tspan>
+    <tspan x="0" dy="16" >         .::--===++**** #### #****+--+- - .      </tspan>
+    <tspan x="0" dy="16" >                ...-==+.. ** .***-+- - .      </tspan>
+  </text>
+</svg>

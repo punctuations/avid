@@ -30,6 +30,7 @@ export function sendText(res, status, contentType, body) {
   res.writeHead(status, {
     "Content-Type": contentType,
     "Content-Length": Buffer.byteLength(body, "utf8"),
+    "Cache-Control": "public, max-age=31536000, immutable",
   });
   res.end(body);
 }
@@ -44,6 +45,7 @@ export function sendBytes(res, status, contentType, disposition, bitArray) {
     "Content-Type": contentType,
     "Content-Disposition": disposition,
     "Content-Length": buf.byteLength,
+    "Cache-Control": "public, max-age=31536000, immutable",
   });
   res.end(buf);
 }
