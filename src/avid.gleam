@@ -2,12 +2,6 @@ import avid/avatar
 import avid/render_bmp
 import avid/render_png
 import avid/render_svg
-import gleam/erlang/process
-import gleam/int
-import mist
-import server/router
-import wisp
-import wisp/wisp_mist
 
 pub type Avatar =
   avatar.Avatar
@@ -16,18 +10,12 @@ pub type Avatar =
 // Server entrypoint (gleam run)
 // ---------------------------------------------------------------------------
 
+@target(javascript)
+import server/router
+
+@target(javascript)
 pub fn main() {
-  wisp.configure_logger()
-
-  let port = 3000
-  let assert Ok(_) =
-    wisp_mist.handler(router.handle, "")
-    |> mist.new()
-    |> mist.port(port)
-    |> mist.start()
-
-  wisp.log_info("listening on http://localhost:" <> int.to_string(port))
-  process.sleep_forever()
+  router.create_server(router.handle)
 }
 
 // ---------------------------------------------------------------------------
