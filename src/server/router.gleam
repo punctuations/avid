@@ -4,8 +4,8 @@
 /// Routes:
 ///   GET /avatar/:name             -> SVG (default)
 ///   GET /avatar/:name?format=svg  -> SVG, width/height from ?size=N (default 200)
-///   GET /avatar/:name?format=png  -> PNG, cell_size from ?size=N (default 40)
-///   GET /avatar/:name?format=bmp  -> BMP, cell_size from ?size=N (default 40)
+///   GET /avatar/:name?format=png  -> PNG, size from ?size=N (default 200)
+///   GET /avatar/:name?format=bmp  -> BMP, size from ?size=N (default 200)
 ///   GET /health                   -> 200 OK plaintext
 import avid/avatar
 @target(javascript)
@@ -26,7 +26,7 @@ import gleam/result
 import gleam/string
 
 // ---------------------------------------------------------------------------
-// FFI types — thin wrappers around Node's http.IncomingMessage / ServerResponse
+// FFI types - thin wrappers around Node's http.IncomingMessage / ServerResponse
 // ---------------------------------------------------------------------------
 
 pub type NodeRequest
@@ -110,7 +110,8 @@ fn avatar_handler(res: NodeResponse, name: String, query_string: String) -> Nil 
     }
 
     "png" -> {
-      let cell = int.parse(size_str) |> result.unwrap(40)
+      let size = int.parse(size_str) |> result.unwrap(200)
+      let cell = int.max(1, size / 5)
       let bytes = render_png.render(av, cell)
       send_bytes(
         res,
@@ -122,7 +123,8 @@ fn avatar_handler(res: NodeResponse, name: String, query_string: String) -> Nil 
     }
 
     "bmp" -> {
-      let cell = int.parse(size_str) |> result.unwrap(40)
+      let size = int.parse(size_str) |> result.unwrap(200)
+      let cell = int.max(1, size / 5)
       let bytes = render_bmp.render(av, cell)
       send_bytes(
         res,

@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>avid - deterministic avatar ids</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --bg: #0f0f0f;
+        --bg2: #1a1a1a;
+        --fg: #c9c9c9;
+        --fg-dim: #666;
+        --accent: #e0e0e0;
+        --border: #2a2a2a;
+        --green: #7ec8a0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--fg);
+        font-family: "JetBrains Mono", monospace;
+        font-size: 14px;
+        line-height: 1.7;
+        padding: 80px 24px;
+        padding-bottom: 0;
+      }
+
+      .wrap {
+        max-width: 680px;
+        margin: 0 auto;
+      }
+
+      /* ── logo ── */
+      .logo {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 40px;
+        gap: 3px;
+        margin-bottom: 48px;
+      }
+      .logo span {
+        display: block;
+        width: 17px;
+        height: 17px;
+        background: var(--accent);
+      }
+      .logo span:nth-child(3) {
+        background: transparent;
+      }
+
+      /* ── tagline ── */
+      .tagline {
+        color: var(--fg-dim);
+        margin-bottom: 48px;
+        font-size: 13px;
+      }
+
+      /* ── section ── */
+      section {
+        margin-bottom: 56px;
+      }
+
+      h2 {
+        color: var(--accent);
+        font-size: 14px;
+        font-weight: 700;
+        margin-bottom: 20px;
+      }
+
+      p {
+        color: var(--fg);
+        margin-bottom: 14px;
+        font-size: 13px;
+      }
+
+      /* ── endpoint table ── */
+      .endpoints {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .endpoints tr {
+        border-bottom: 1px solid var(--border);
+      }
+      .endpoints tr:last-child {
+        border-bottom: none;
+      }
+      .endpoints td {
+        padding: 10px 0;
+        font-size: 13px;
+        vertical-align: top;
+      }
+      .endpoints td:first-child {
+        color: var(--green);
+        padding-right: 32px;
+        white-space: nowrap;
+      }
+      .endpoints td:last-child {
+        color: var(--fg-dim);
+      }
+
+      /* ── code block ── */
+      .code-block {
+        border-radius: 0.25rem;
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        padding: 20px 24px;
+        margin-bottom: 16px;
+        position: relative;
+      }
+      .code-block .label {
+        font-size: 11px;
+        color: var(--fg-dim);
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      .code-block code {
+        color: var(--accent);
+        font-size: 13px;
+        display: block;
+      }
+      .code-block code .dim {
+        color: var(--fg-dim);
+      }
+      .code-block code .hl {
+        color: var(--green);
+      }
+
+      /* ── avatar preview ── */
+      .preview-row {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 20px;
+      }
+      .preview-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+      }
+      .preview-item img {
+        width: 64px;
+        height: 64px;
+        display: block;
+        image-rendering: pixelated;
+      }
+      .preview-item span {
+        font-size: 11px;
+        color: var(--fg-dim);
+      }
+
+      /* ── params table ── */
+      .params {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 4px;
+      }
+      .params th {
+        text-align: left;
+        font-size: 11px;
+        color: var(--fg-dim);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--border);
+        font-weight: 400;
+      }
+      .params td {
+        padding: 10px 0;
+        font-size: 13px;
+        vertical-align: top;
+        border-bottom: 1px solid var(--border);
+      }
+      .params tr:last-child td {
+        border-bottom: none;
+      }
+      .params td:first-child {
+        color: var(--green);
+        padding-right: 24px;
+        white-space: nowrap;
+      }
+      .params td:nth-child(2) {
+        color: var(--fg-dim);
+        padding-right: 24px;
+        white-space: nowrap;
+      }
+      .params td:nth-child(3) {
+        color: var(--fg);
+      }
+
+      /* ── footer ── */
+      footer {
+        margin-top: 80px;
+        padding-top: 24px;
+        border-top: 1px solid var(--border);
+        font-size: 12px;
+        color: var(--fg-dim);
+        display: flex;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      footer > div {
+        display: flex;
+        gap: 24px;
+      }
+
+      footer a {
+        color: var(--fg-dim);
+        text-decoration: none;
+        transition-property: color;
+        transition-duration: 250ms;
+      }
+      footer a:hover,
+      footer a:hover > svg {
+        color: var(--accent);
+        fill: var(--accent);
+      }
+
+      footer a > svg {
+        transition-property: fill;
+        transition-duration: 250ms;
+      }
+
+      .gleam:hover {
+        color: #ffaff3;
+      }
+
+      .inline {
+        display: inline-flex;
+        justify-items: center;
+        align-items: center;
+      }
+
+      /* ── flower field ── */
+      .flower-field {
+        position: relative;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 32px;
+        pointer-events: none;
+        user-select: none;
+        overflow: hidden;
+      }
+      .flower {
+        position: absolute;
+        bottom: 0;
+        color: var(--fg-dim);
+        opacity: 0.75;
+        line-height: 1;
+        transform-origin: bottom center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="logo" aria-label="avid">
+        <span></span><span></span> <span></span><span></span>
+      </div>
+
+      <p class="tagline">
+        Deterministic avatar generation API. No accounts. No rate limits.
+      </p>
+
+      <!-- endpoints -->
+      <section>
+        <h2>Endpoints</h2>
+        <table class="endpoints">
+          <tr>
+            <td>GET /avatar/:name</td>
+            <td>Generate an avatar for any name or identifier</td>
+          </tr>
+          <tr>
+            <td>GET /health</td>
+            <td>Health check</td>
+          </tr>
+        </table>
+      </section>
+
+      <!-- usage -->
+      <section>
+        <h2>Usage</h2>
+
+        <div class="code-block">
+          <div class="label">SVG &mdash; default</div>
+          <code>/avatar/<span class="hl">alice</span></code>
+        </div>
+
+        <div class="code-block">
+          <div class="label">SVG with custom size</div>
+          <code
+            >/avatar/<span class="hl">alice</span
+            ><span class="dim">?size=400</span></code
+          >
+        </div>
+
+        <div class="code-block">
+          <div class="label">PNG</div>
+          <code
+            >/avatar/<span class="hl">alice</span
+            ><span class="dim">?format=png&amp;size=200</span></code
+          >
+        </div>
+
+        <div class="code-block">
+          <div class="label">BMP</div>
+          <code
+            >/avatar/<span class="hl">alice</span
+            ><span class="dim">?format=bmp&amp;size=200</span></code
+          >
+        </div>
+
+        <div class="preview-row" id="preview"></div>
+      </section>
+
+      <!-- parameters -->
+      <section>
+        <h2>Parameters</h2>
+        <table class="params">
+          <tr>
+            <th>param</th>
+            <th>default</th>
+            <th style="text-align: center">description</th>
+          </tr>
+          <tr>
+            <td>format</td>
+            <td>svg</td>
+            <td>
+              Output format. One of <code>svg</code>, <code>png</code>,
+              <code>bmp</code>.
+            </td>
+          </tr>
+          <tr>
+            <td>size</td>
+            <td>200</td>
+            <td>
+              Total image width &amp; height in px. The same across all formats
+              -- <code>size=200</code> always produces a 200x200 image.
+            </td>
+          </tr>
+        </table>
+      </section>
+
+      <!-- how it works -->
+      <section>
+        <h2>How it works</h2>
+        <p>
+          The input name is hashed to produce a deterministic seed. That seed
+          drives a 5x5 symmetric grid of filled and empty cells, plus a
+          foreground and background colour drawn from a fixed palette. The same
+          name always produces the same avatar.
+        </p>
+        <p>
+          Avatars are suitable as placeholder profile images, identicons for
+          user accounts, or anywhere you need a unique visual identity derived
+          from a string.
+        </p>
+      </section>
+
+      <footer>
+        <div>
+          <a href="https://github.com/punctuations/avid" class="inline">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              style="margin-right: 1rem"
+              width="16"
+              height="16"
+              fill="#666"
+            >
+              <path
+                d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"
+              />
+            </svg>
+            <span>GitHub</span>
+          </a>
+          <a href="https://gleam.run" class="gleam">Built with Gleam</a>
+        </div>
+        <span
+          >Built with &lt;3 by
+          <a href="https://mattt.space" style="text-decoration: underline"
+            >Matt</a
+          ></span
+        >
+      </footer>
+    </div>
+
+    <div class="flower-field" id="flowers"></div>
+
+    <script>
+      // preview avatars
+      const names = ["alice", "bob", "carol", "dave", "eve", "frank"];
+      const row = document.getElementById("preview");
+      names.forEach((name) => {
+        const item = document.createElement("div");
+        item.className = "preview-item";
+        const img = document.createElement("img");
+        img.src = `/avatar/${name}?size=200`;
+        img.alt = name;
+        const label = document.createElement("span");
+        label.textContent = name;
+        item.appendChild(img);
+        item.appendChild(label);
+        row.appendChild(item);
+      });
+
+      // flower field
+      const glyphs = [
+        "#",
+        "*",
+        "&",
+        "#",
+        "@",
+        "*",
+        "#",
+        "&",
+        "%",
+        "#",
+        "*",
+        "%",
+        "#",
+        "&",
+        "*",
+        "@",
+        "%",
+        "&",
+        "#",
+        "*",
+        "#",
+        "@",
+        "&",
+        "*",
+        "#",
+      ];
+
+      // sizes and vertical offsets
+      const sizes = [
+        10, 14, 9, 16, 11, 13, 8, 15, 12, 10, 14, 9, 16, 11, 13, 8, 15, 12, 10,
+        14, 9, 16, 11, 13, 8,
+      ];
+      const offsets = [
+        0, 4, -2, 6, 1, 3, -3, 5, 2, -1, 4, 0, 7, 1, 3, -2, 6, 2, 0, 4, -1, 5,
+        1, 3, -2,
+      ];
+
+      const field = document.getElementById("flowers");
+      const W = window.innerWidth;
+
+      glyphs.forEach((g, i) => {
+        const el = document.createElement("div");
+        el.className = "flower";
+        const size = sizes[i];
+        const offset = offsets[i]; // px hidden below bottom edge
+        el.style.fontSize = size + "px";
+        el.style.bottom = -offset + "px";
+        el.style.left =
+          Math.round((i / (glyphs.length - 1)) * (W - 20) + 4) + "px";
+        el.style.writingMode = "sideways-lr";
+        el.textContent = "<" + g;
+        field.appendChild(el);
+      });
+    </script>
+  </body>
+</html>

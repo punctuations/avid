@@ -5,7 +5,7 @@
 /// PNG structure:
 ///   1. 8-byte magic signature
 ///   2. IHDR chunk  (image header)
-///   3. IDAT chunk  (compressed image data — deflate/zlib)
+///   3. IDAT chunk  (compressed image data -- deflate/zlib)
 ///   4. IEND chunk  (end marker)
 ///
 /// Compression: use "stored" deflate blocks (type 00), no actual
@@ -15,6 +15,7 @@
 /// Each pixel row is prefixed with a filter byte (0x00 = None).
 /// Pixels are 3 bytes each (RGB, 8 bits per channel).
 import avid/avatar.{type Avatar}
+import gleam/bit_array
 import gleam/bytes_tree
 import gleam/int
 import gleam/list
@@ -276,29 +277,19 @@ fn crc32_bit_loop(crc: Int, bits_left: Int) -> Int {
 // ---------------------------------------------------------------------------
 
 fn bit_array_byte_size(bits: BitArray) -> Int {
-  ba_size_loop(bits, 0)
-}
-
-fn ba_size_loop(bits: BitArray, acc: Int) -> Int {
-  case bits {
-    <<_, rest:bits>> -> ba_size_loop(rest, acc + 1)
-    _ -> acc
-  }
+  bit_array.byte_size(bits)
 }
 
 fn split_bits(data: BitArray, bit_count: Int) -> #(BitArray, BitArray) {
-  split_bits_loop(data, bit_count, <<>>)
-}
-
-fn split_bits_loop(
-  data: BitArray,
-  bits_left: Int,
-  acc: BitArray,
-) -> #(BitArray, BitArray) {
-  case bits_left, data {
-    0, rest -> #(acc, rest)
-    _, <<byte, rest:bits>> ->
-      split_bits_loop(rest, bits_left - 8, <<acc:bits, byte>>)
-    _, _ -> #(acc, <<>>)
+  let byte_count = bit_count / 8
+  case bit_array.slice(data, 0, byte_count) {
+    Ok(chunk) -> {
+      let rest_size = bit_array.byte_size(data) - byte_count
+      case bit_array.slice(data, byte_count, rest_size) {
+        Ok(rest) -> #(chunk, rest)
+        Error(_) -> #(data, <<>>)
+      }
+    }
+    Error(_) -> #(data, <<>>)
   }
 }

@@ -24,8 +24,11 @@ pub fn render(av: Avatar, size: Int) -> String {
     [
       "<svg xmlns=\"http://www.w3.org/2000/svg\"",
       "  width=\"" <> size_str <> "\" height=\"" <> size_str <> "\"",
-      "  viewBox=\"0 0 5 5\">",
-      "  <rect width=\"5\" height=\"5\" fill=\"" <> bg <> "\"/>",
+      "  viewBox=\"0 0 5 5\"",
+      "  shape-rendering=\"crispEdges\">",
+      "  <rect width=\"5\" height=\"5\" fill=\""
+        <> bg
+        <> "\" shape-rendering=\"crispEdges\"/>",
       cells,
       "</svg>",
     ],

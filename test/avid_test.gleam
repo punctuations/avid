@@ -41,7 +41,7 @@ pub fn grid_length_test() {
 
 pub fn grid_is_mirrored_test() {
   let av = avatar.from_name("mirror")
-  // Each row of 5: [c0,c1,c2,c1,c0] — col 0 == col 4, col 1 == col 3
+  // Each row of 5: [c0,c1,c2,c1,c0] - col 0 == col 4, col 1 == col 3
   check_mirror(av.grid, 0)
 }
 

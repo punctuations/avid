@@ -77,7 +77,7 @@ fn bg_color(hash: Int) -> Color {
 }
 
 /// HSL (h: 0-359, s: 0-100, l: 0-100) -> RGB (0-255 each).
-/// Pure integer arithmetic — no floats.
+/// No floats, just integer arithmetic
 pub fn hsl_to_rgb(h: Int, s: Int, l: Int) -> Color {
   let s1 = s * 10
   let l1 = l * 10
