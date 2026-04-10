@@ -4,11 +4,17 @@ import http from "node:http";
 const PORT = process.env.PORT ?? 3000;
 
 export function createServer(handler) {
-  const server = http.createServer((req, res) => {
-    handler(req, res);
-  });
-  server.listen(PORT, () => {
-    console.log(`Listening on http://localhost:${PORT}`);
+  if (globalThis.__vercel_capture) {
+    // hand the handler back instead of listening
+    globalThis.__vercel_capture(handler);
+    return;
+  }
+  // Local dev mode
+  import("node:http").then(({ default: http }) => {
+    const PORT = process.env.PORT ?? 3000;
+    http
+      .createServer((req, res) => handler(req, res))
+      .listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`));
   });
 }
 
