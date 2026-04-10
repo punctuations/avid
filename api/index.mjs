@@ -1,13 +1,6 @@
-import { main } from "../build/dev/javascript/avid/avid.mjs";
-
-let gleamHandler = null;
+import { handle } from "../build/dev/javascript/avid/server/router.mjs";
+import { createServer } from "../build/dev/javascript/avid/server/server_ffi.mjs";
 
 export default async function handler(req, res) {
-  if (!gleamHandler) {
-    globalThis.__vercel_capture = (h) => {
-      gleamHandler = h;
-    };
-    await import("../build/dev/javascript/avid/avid.mjs");
-  }
-  gleamHandler(req, res);
+  handle(req, res);
 }
