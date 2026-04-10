@@ -33,7 +33,7 @@ pub fn main() {
   // SVG - pass pixel size for width/height attributes
   let svg: String = avid.to_svg(av, 200)
 
-  // BMP - pass cell_size (pixels per grid cell); 40 → 200×200
+  // BMP - pass cell_size (pixels per grid cell); 40 -> 200x200
   let bmp: BitArray = avid.to_bmp(av, 40)
 
   // PNG - same cell_size convention
