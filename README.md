@@ -11,7 +11,7 @@ Name string
     V
 FNV-1a 32-bit hash          (fast, good distribution, pure bitwise ops)
     │
-    ├─> Hue from bits [7..0]  -> foreground + background color via HSL→RGB
+    ├─> Hue from bits [7..0]  -> foreground + background color via HSL -> RGB
     │
     └─> Bits [0..14]          -> 5x5 mirrored boolean grid
             │
