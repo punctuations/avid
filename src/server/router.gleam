@@ -1,11 +1,15 @@
 @target(javascript)
-/// HTTP router for the avatar generation API (JavaScript target).
+/// HTTP router for the avatar generation API (JavaScript/Node target).
 ///
 /// Routes:
 ///   GET /avatar/:name             -> SVG (default)
 ///   GET /avatar/:name?format=svg  -> SVG, width/height from ?size=N (default 200)
 ///   GET /avatar/:name?format=png  -> PNG, size from ?size=N (default 200)
 ///   GET /avatar/:name?format=bmp  -> BMP, size from ?size=N (default 200)
+///   GET /truchet/:name            -> Truchet SVG (default)
+///   GET /truchet/:name?format=svg -> SVG, size from ?size=N (default 400)
+///   GET /truchet/:name?format=png -> PNG, size from ?size=N (default 400)
+///   GET /truchet/:name?format=bmp -> BMP, size from ?size=N (default 400)
 ///   GET /health                   -> 200 OK plaintext
 import avid/avatar
 @target(javascript)
@@ -14,6 +18,8 @@ import avid/render_bmp
 import avid/render_png
 @target(javascript)
 import avid/render_svg
+@target(javascript)
+import avid/truchet
 @target(javascript)
 import gleam/int
 @target(javascript)
@@ -76,13 +82,13 @@ pub fn get_url(req: NodeRequest) -> String
 pub fn handle(req: NodeRequest, res: NodeResponse) -> Nil {
   let method = get_method(req)
   let full_url = get_url(req)
-
   let #(path, query_string) = split_url(full_url)
   let segments = path_segments(path)
 
   case method, segments {
     "GET", ["health"] -> health(res)
     "GET", ["avatar", name] -> avatar_handler(res, name, query_string)
+    "GET", ["truchet", name] -> truchet_handler(res, name, query_string)
     _, _ -> send_text(res, 404, "text/plain", "Not found")
   }
 }
@@ -100,41 +106,64 @@ fn health(res: NodeResponse) -> Nil {
 fn avatar_handler(res: NodeResponse, name: String, query_string: String) -> Nil {
   let format = query_param(query_string, "format") |> option.unwrap("svg")
   let size_str = query_param(query_string, "size") |> option.unwrap("")
-  let av = avatar.from_name(name)
+  let target = avatar.from_name(name) |> avatar.to_render_target()
+  let size = int.parse(size_str) |> result.unwrap(200)
 
   case format {
-    "svg" -> {
-      let size = int.parse(size_str) |> result.unwrap(200)
-      let svg = render_svg.render(av, size)
-      send_text(res, 200, "image/svg+xml", svg)
-    }
-
-    "png" -> {
-      let size = int.parse(size_str) |> result.unwrap(200)
-      let cell = int.max(1, size / 5)
-      let bytes = render_png.render(av, cell)
+    "svg" ->
+      send_text(res, 200, "image/svg+xml", render_svg.render(target, size))
+    "png" ->
       send_bytes(
         res,
         200,
         "image/png",
         "inline; filename=\"" <> name <> ".png\"",
-        bytes,
+        render_png.render(target, size),
       )
-    }
-
-    "bmp" -> {
-      let size = int.parse(size_str) |> result.unwrap(200)
-      let cell = int.max(1, size / 5)
-      let bytes = render_bmp.render(av, cell)
+    "bmp" ->
       send_bytes(
         res,
         200,
         "image/bmp",
         "inline; filename=\"" <> name <> ".bmp\"",
-        bytes,
+        render_bmp.render(target, size),
       )
-    }
+    _ ->
+      send_text(
+        res,
+        422,
+        "text/plain",
+        "Unknown format \"" <> format <> "\". Use svg, png, or bmp.",
+      )
+  }
+}
 
+@target(javascript)
+fn truchet_handler(res: NodeResponse, name: String, query_string: String) -> Nil {
+  let format = query_param(query_string, "format") |> option.unwrap("svg")
+  let size_str = query_param(query_string, "size") |> option.unwrap("")
+  let target = truchet.from_name(name) |> truchet.to_render_target()
+  let size = int.parse(size_str) |> result.unwrap(200)
+
+  case format {
+    "svg" ->
+      send_text(res, 200, "image/svg+xml", render_svg.render(target, size))
+    "png" ->
+      send_bytes(
+        res,
+        200,
+        "image/png",
+        "inline; filename=\"" <> name <> ".png\"",
+        render_png.render(target, size),
+      )
+    "bmp" ->
+      send_bytes(
+        res,
+        200,
+        "image/bmp",
+        "inline; filename=\"" <> name <> ".bmp\"",
+        render_bmp.render(target, size),
+      )
     _ ->
       send_text(
         res,
